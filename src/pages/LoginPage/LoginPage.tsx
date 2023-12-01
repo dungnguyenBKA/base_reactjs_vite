@@ -27,13 +27,12 @@ interface Company {
 const LoginPage: React.FC = () => {
   const { signIn } = useAuth();
   const form = Form.useFormInstance<LoginFormValue>();
-  const apiRepository = ApiRepository.getInstance();
-  const { isLoading, setLoading } = usePageState();
+  const { isLoading, setLoading, repository } = usePageState();
   async function _login(request: LoginModelRequest) {
     try {
       setLoading(true);
       await sleep(2000);
-      const res = await apiRepository.login(request);
+      const res = await repository.login(request);
       if (res.data) {
         AppToastRef?.current?.show({ severity: "success", detail: "Login success" });
         signIn(res.data);
