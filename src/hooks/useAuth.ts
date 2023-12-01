@@ -1,5 +1,5 @@
 import {useAppDispatch, useAppSelector} from "../store/Store.ts";
-import {_signIn, _signOut} from "../store/slices/AuthSlice.ts";
+import { _signIn, _signOut, _updateUser } from "../store/slices/AuthSlice.ts";
 import UserModel from "../network/models/UserModel.ts";
 import {useNavigate} from "react-router-dom";
 import {useEffect} from "react";
@@ -18,6 +18,10 @@ export default function useAuth() {
     dispatch(_signIn(user));
   }
 
+  function updateUser(user: Partial<UserModel>) {
+    dispatch(_updateUser(user));
+  }
+
   useEffect(() => {
     if (user) {
       navigate("/")
@@ -30,5 +34,6 @@ export default function useAuth() {
     user,
     signIn,
     signOut,
+    updateUser,
   };
 }

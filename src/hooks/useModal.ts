@@ -1,4 +1,4 @@
-import {ReactNode, useState} from "react";
+import { ReactNode, useState } from "react";
 
 /**
  * A function that takes a result of a variable type and returns nothing.
@@ -18,7 +18,7 @@ export default function useModal() {
   function openModal<ModalResult>(modalFactory: ModalFactory<ModalResult>) {
     return new Promise<ModalResult | undefined>((resolve) => {
       function close(value?: ModalResult) {
-        resolve(value)
+        resolve(value);
         setModalNode(null);
       }
 
@@ -26,5 +26,5 @@ export default function useModal() {
     });
   }
 
-  return [modalNode, openModal] as const;
+  return { modalNode, openModal } as const;
 }
