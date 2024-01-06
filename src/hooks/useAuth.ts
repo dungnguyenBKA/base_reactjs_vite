@@ -1,14 +1,14 @@
-import {useAppDispatch, useAppSelector} from "../store/Store.ts";
-import { _signIn, _signOut, _updateUser } from "../store/slices/AuthSlice.ts";
+import { useAppDispatch, useAppSelector } from "../store/Store";
+import { _signIn, _signOut } from "../store/slices/AuthSlice";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 import UserModel from "../network/models/UserModel.ts";
-import {useNavigate} from "react-router-dom";
-import {useEffect} from "react";
 
 export default function useAuth() {
   const dispatch = useAppDispatch();
-  const {user} = useAppSelector(state => state.auth);
+  const { user } = useAppSelector(state => state.auth);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   function signOut() {
     dispatch(_signOut());
@@ -18,22 +18,17 @@ export default function useAuth() {
     dispatch(_signIn(user));
   }
 
-  function updateUser(user: Partial<UserModel>) {
-    dispatch(_updateUser(user));
-  }
-
   useEffect(() => {
     if (user) {
-      navigate("/")
+      navigate("/");
     } else {
-      navigate("/login")
+      navigate("/login");
     }
-  }, [user])
+  }, [user]);
 
   return {
     user,
     signIn,
-    signOut,
-    updateUser,
+    signOut
   };
 }

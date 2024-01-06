@@ -1,24 +1,35 @@
 .home-page-wrapper {
+  //noinspection ALL,CssUnusedSymbol
   .p-splitter {
     border: 1px solid #d3d5d7;
+    //noinspection ALL,CssUnusedSymbol
     .p-splitter-panel {
+      //noinspection ALL,CssUnusedSymbol
       .ant-tabs-nav-wrap {
         display: flex;
         justify-content: center;
       }
     }
   }
+
+  //noinspection ALL,CssUnusedSymbol
   .p-splitter-gutter {
     background-color: #d3d5d7;
   }
+
+  //noinspection ALL,CssUnusedSymbol
   .list-tabs {
+    //noinspection ALL,CssUnusedSymbol
     .ant-tabs  {
+      //noinspection ALL,CssUnusedSymbol
       .ant-tabs-nav-list {
         display: flex;
         flex-wrap: wrap;
       }
     }
   }
+
+  //noinspection ALL,CssUnusedSymbol
   .p-tabview-panels {
     padding: 8px !important;
   }

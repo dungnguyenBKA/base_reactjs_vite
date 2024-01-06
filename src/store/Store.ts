@@ -4,7 +4,6 @@ import { persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { PersistConfig } from "redux-persist/es/types";
 import AuthReducer from "./slices/AuthSlice.ts";
-import TabsReducer from "./slices/TabsSlice.ts";
 
 const reducersToPersist: string[] = ["auth"];
 
@@ -15,8 +14,7 @@ const persistConfig: PersistConfig<any> = {
 };
 
 const rootReducer = combineReducers({
-  auth: AuthReducer,
-  tabs: TabsReducer
+  auth: AuthReducer
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

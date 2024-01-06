@@ -1,9 +1,8 @@
 import React, {PropsWithChildren} from "react";
-import LoadingPage from "../../../pages/LoadingPage/LoadingPage.tsx";
+import LoadingPage from "../../../pages/LoadingPage/LoadingPage";
 
 export enum TypeLoading {
-  OVERLAY,
-  REPLACE
+  OVERLAY
 }
 
 interface ScaffoldProps extends PropsWithChildren {
@@ -27,12 +26,18 @@ const Scaffold: React.FC<ScaffoldProps> = (props) => {
       <LoadingPage style={{
         position: "absolute",
         top: 0,
+        bottom: 0,
         background: "rgba(0,0,0,0.5)",
+        zIndex: 1000
       }}/>
     </div>;
   }
 
   return <LoadingPage/>;
+}
+
+Scaffold.defaultProps = {
+  typeLoading: TypeLoading.OVERLAY
 }
 
 export default Scaffold;
