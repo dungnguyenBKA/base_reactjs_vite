@@ -1,59 +1,85 @@
 import React from "react";
-import useAuth from "../../hooks/useAuth.ts";
-import { Button } from "primereact/button";
-import Assets from "../../assets/Assets.ts";
-import { Avatar } from "primereact/avatar";
-import "./styles/HomePage.scss";
 import Scaffold, { TypeLoading } from "../../shared/components/Scaffold/Scaffold.tsx";
 import usePageState from "../../hooks/usePageState.ts";
-
+import Header from "./components/Header.tsx";
+import { ChartData, ChartOptions } from "chart.js";
+import { Chart } from "primereact/chart";
+import AppColors from "../../shared/styles/AppColors.ts";
 const HomePage: React.FC = () => {
-  const { signOut, user } = useAuth();
   const { isLoading, setLoading } = usePageState();
+
+
+
+
+  const data: ChartData = {
+    labels: ['January', 'February'],
+    datasets: [
+      {
+        type: 'bar',
+        label: 'Dataset 1',
+        backgroundColor: 'var(--blue-500)',
+        data: [50]
+      },
+      {
+        type: 'bar',
+        label: 'Dataset 2',
+        backgroundColor: 'red',
+        data: [21, 84]
+      },
+      {
+        type: 'bar',
+        label: 'Dataset 3',
+        backgroundColor: 'var(--blue-500)',
+        data: [41, 52]
+      }
+    ]
+  };
+
+  const options: ChartOptions = {
+    indexAxis: "y",
+    maintainAspectRatio: false,
+    aspectRatio: 0.8,
+    plugins: {
+      legend: {
+        labels: {
+          color: AppColors.colorPrimary,
+        }
+      }
+    },
+    scales: {
+      x: {
+        stacked: true,
+        ticks: {
+          color: AppColors.colorPrimary
+        },
+        grid: {
+          color: AppColors.colorPrimary
+        }
+      },
+      y: {
+        stacked: true,
+        ticks: {
+          color: AppColors.colorPrimary
+        },
+        grid: {
+          color: AppColors.colorPrimary
+        }
+      }
+    }
+  };
 
   return (
     <>
       <Scaffold
         isLoading={isLoading}
         typeLoading={TypeLoading.OVERLAY}>
-        <div className="home-page-wrapper">
-          <div
-            className={"flex flex-row p-3"}
-            style={{
-              alignItems: "center"
-            }}
-          >
-            <img
-              src={Assets.icAccton}
-              style={{
-                height: 60
-              }}
-              alt={""}
-            />
+        <Header/>
 
-            <div className={"flex-1"} />
-
-            <Avatar label="A" shape="circle" />
-
-            <p
-              style={{
-                padding: 4
-              }}
-            >{`Hello, ${user?.user_name}`}</p>
-
-            <Button
-              style={{
-                padding: 4
-              }}
-              onClick={() => {
-                signOut();
-              }}
-            >
-              Log out
-            </Button>
-          </div>
-        </div>
-
+        <Chart
+          type={"bar"}
+          data={data}
+          options={options}
+        />
 
       </Scaffold>
     </>
